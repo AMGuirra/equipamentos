@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lista de Pedidos</title>
+
+<link rel="stylesheet"
+	th:href="@{/bootstrap-5.1.3-dist/css/bootstrap.min.css}">
+<script th:src="@{/jquery-3.6.0-dist/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/bootstrap-5.1.3-dist/js/bootstrap.min.js}"></script>
+<link rel="stylesheet" th:href="@{/bootstrap-5.1.3-dist/css/styles.css}">
+</head>
+<body>
+	<div th:replace="auth/auth-generica-nav :: navGenerica"></div>
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-10">
+				<div class="card">
+					<div class="card-header bg-primary text-white">
+						<h1 th:text="#{pedido.list}"></h1>
+					</div>
+					<div class="card-body">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th th:text="#{pedido.id}"></th>
+									<th th:text="#{pedido.usuario.nome}"></th>
+									<th th:text="#{pedido.date}"></th>
+									<th>Ações</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:if="${pedidos.empty}">
+									<td colspan="4" th:text="#{pedido.no}"></td>
+								</tr>
+								<tr th:each="pedido : ${pedidos}">
+									<td><span th:text="${pedido.id}"></span></td>
+									<td><span th:text="${pedido.nome}"></span></td>
+									<td><span th:text="${pedido.data}"></span></td>
+									<td><a class="btn btn-outline-primary btn-sm"
+										th:href="@{/pedido/ver/{id}/{data}(id=${pedido.id}, data=${pedido.data})}"
+										th:text="#{pedido.ver}"></a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<title>Lista de Pedidos</title>
+
+<link rel="stylesheet"
+	th:href="@{/bootstrap-5.1.3-dist/css/bootstrap.min.css}">
+<script th:src="@{/jquery-3.6.0-dist/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/bootstrap-5.1.3-dist/js/bootstrap.min.js}"></script>
+
+<link rel="stylesheet" th:href="@{/bootstrap-5.1.3-dist/css/styles.css}">
+
+<script>
+	$(document).ready(function() {
+		$('button').click(function(e) {
+			if (!(confirm("Are you sure you wish to process these requests"))) {
+				e.preventDefault();
+			} else {
+				$("#postPedidos").submit();
+			}
+		});
+	});
+</script>
+
+
+</head>
+<body>
+
+	<div th:replace="auth/auth-generica-nav :: navGenerica"></div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col">
+
+				<h1 th:text="#{equipamento.list}"></h1>
+
+				<div class="card">
+					<div class="card-body">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th th:text="#{equipamento.id}"></th>
+									<th th:text="#{equipamento.dataEmprestimo}"></th>
+									<th th:text="#{equipamento.dataDevolucao}"></th>
+									<th th:text="#{equipamento.nome}"></th>
+									<th th:text="#{equipamento.numeroDeSerie}"></th>
+									<th th:text="#{equipamento.fabricante}"></th>
+									<th th:text="#{pedido.status}"></th>
+
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr th:if="${equipamentos.empty}">
+									<td colspan="7" th:text="#{equipamento.no}"></td>
+								</tr>
+								<tr th:each="equipamento : ${equipamentos}">
+
+									<td><span th:text="${equipamento.id}"></span></td>
+									<td><span
+										th:text="${#dates.format(equipamento.emprestimo, 'yyyy-MM-dd')}"></span></td>
+									<td><span
+										th:text="${#dates.format(equipamento.devolucao, 'yyyy-MM-dd')}"></span></td>
+									<td><span th:text="${equipamento.nome}"></span></td>
+									<td><span th:text="${equipamento.numero}"></span></td>
+									<td><span th:text="${equipamento.fabricante}"></span></td>
+
+
+									<!-- verificar situação do case = 3 ser o em análise
+									 -->
+
+									<th:block th:switch="${equipamento.estado}">
+										<div th:case="'1'">
+											<td><span>Aprovado!</span></td>
+										</div>
+										<div th:case="'2'">
+											<td><span>Negado!</span></td>
+										</div>
+										<div th:case="'3'">
+
+
+											<th:block
+												th:if="${ #authorization.expression('hasAuthority(''ADMIN'')')}">
+												<td><a class="btn btn-outline-primary btn-sm"
+													th:href="@{/pedido/admin/aprovar/1/{idPedido}(idPedido=${equipamento.id})}">
+														Aprovar </a></td>
+												<td><a class="btn btn-outline-danger btn-sm"
+													th:href="@{/pedido/admin/aprovar/2/{idPedido}(idPedido=${equipamento.id})}">
+														Negar </a></td>
+											</th:block>
+
+
+											<th:block
+												th:if="${ #authorization.expression('hasAuthority(''USER'')')}">
+												<td><span>Em análise</span></td>
+											</th:block>
+
+
+										</div>
+									</th:block>
+
+
+
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>

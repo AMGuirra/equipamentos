@@ -1,0 +1,23 @@
+body {
+	background: url(/images/fundo.jpg) no-repeat center center fixed;
+	background-size: cover;
+	font-family: 'Arial', sans-serif;
+}
+
+.header {
+	background: rgba(0, 123, 255, 0.8); /* Fundo semi-transparente */
+	color: #fff;
+	padding: 20px 0;
+}
+
+.header h1 {
+	margin: 0;
+}
+
+.welcome-message, .content {
+	margin-top: 20px;
+	padding: 20px;
+	background: rgba(255, 255, 255, 0.9); /* Fundo semi-transparente */
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
