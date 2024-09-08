@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fourcatsdev.aula20.modelo.Categoria;
-import com.fourcatsdev.aula20.modelo.Usuario;
 import com.fourcatsdev.aula20.service.CategoriaService;
 
 

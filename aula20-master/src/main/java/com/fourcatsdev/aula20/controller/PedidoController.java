@@ -1,33 +1,21 @@
 package com.fourcatsdev.aula20.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fourcatsdev.aula20.modelo.Equipamento;
 import com.fourcatsdev.aula20.modelo.EstadoPedido;
 import com.fourcatsdev.aula20.modelo.Pedido;
 import com.fourcatsdev.aula20.modelo.Usuario;
 import com.fourcatsdev.aula20.repository.PedidoResponseData;
 import com.fourcatsdev.aula20.repository.PedidoResponseEquipamento;
-import com.fourcatsdev.aula20.service.EquipamentoService;
 import com.fourcatsdev.aula20.service.EstadoPedidoService;
 import com.fourcatsdev.aula20.service.PedidoService;
 import com.fourcatsdev.aula20.service.UsuarioService;
@@ -41,9 +29,6 @@ public class PedidoController {
 	
 	@Autowired
 	private PedidoService pedidoService;
-	
-	@Autowired
-	private EquipamentoService equipamentoService;
 	
 	@Autowired
 	private EstadoPedidoService estadoPedidoService;

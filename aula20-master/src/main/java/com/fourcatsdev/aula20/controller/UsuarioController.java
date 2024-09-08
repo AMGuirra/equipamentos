@@ -17,10 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fourcatsdev.aula20.modelo.Categoria;
 import com.fourcatsdev.aula20.modelo.Papel;
 import com.fourcatsdev.aula20.modelo.Usuario;
-import com.fourcatsdev.aula20.service.CategoriaService;
 import com.fourcatsdev.aula20.service.I18nService;
 import com.fourcatsdev.aula20.service.PapelService;
 import com.fourcatsdev.aula20.service.UsuarioService;
@@ -34,9 +32,6 @@ public class UsuarioController {
 
 	@Autowired
 	private PapelService papelService;
-	
-	@Autowired
-	private CategoriaService categoriaService;
 	
 	@Autowired
 	private I18nService i18nService;

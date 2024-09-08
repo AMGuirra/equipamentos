@@ -15,6 +15,7 @@ import com.fourcatsdev.aula20.repository.UsuarioRepository;
 
 
 
+@SuppressWarnings("deprecation")
 @Configuration
 @EnableWebSecurity
 public class ConfiguracaoSeguranca extends WebSecurityConfigurerAdapter {

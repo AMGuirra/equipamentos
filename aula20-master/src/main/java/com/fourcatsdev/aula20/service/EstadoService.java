@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fourcatsdev.aula20.modelo.Categoria;
 import com.fourcatsdev.aula20.modelo.Estado;
 import com.fourcatsdev.aula20.repository.EstadoRepository;
 

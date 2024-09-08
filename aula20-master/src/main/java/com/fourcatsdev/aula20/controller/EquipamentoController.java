@@ -1,8 +1,6 @@
 package com.fourcatsdev.aula20.controller;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -25,12 +23,9 @@ import com.fourcatsdev.aula20.exception.EquipamentoNotFoundException;
 import com.fourcatsdev.aula20.modelo.Categoria;
 import com.fourcatsdev.aula20.modelo.Equipamento;
 import com.fourcatsdev.aula20.modelo.Estado;
-import com.fourcatsdev.aula20.modelo.EstadoPedido;
-import com.fourcatsdev.aula20.modelo.Pedido;
 import com.fourcatsdev.aula20.modelo.Usuario;
 import com.fourcatsdev.aula20.service.CategoriaService;
 import com.fourcatsdev.aula20.service.EquipamentoService;
-import com.fourcatsdev.aula20.service.EstadoPedidoService;
 import com.fourcatsdev.aula20.service.EstadoService;
 import com.fourcatsdev.aula20.service.PedidoService;
 import com.fourcatsdev.aula20.service.UsuarioService;
@@ -51,9 +46,6 @@ public class EquipamentoController {
 	
 	@Autowired
 	private UsuarioService usuarioService;
-	
-	@Autowired
-	private EstadoPedidoService estadoPedidoService;
 	
 	@Autowired
 	private PedidoService pedidoService;
