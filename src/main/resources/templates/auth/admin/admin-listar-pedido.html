@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lista de Pedidos</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script th:src="@{/js/theme.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<link rel="stylesheet" th:href="@{/bootstrap-5.1.3-dist/css/styles.css}">
+</head>
+<body>
+	<div th:replace="auth/auth-generica-nav :: navGenerica"></div>
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-10">
+				<div class="card">
+					<div class="card-header bg-primary text-white">
+						<h1 th:text="#{pedido.list}"></h1>
+					</div>
+					<div class="card-body">
+						<div class="mb-3">
+							<a th:href="@{/equipamento/listar}" class="btn btn-primary"
+								th:text="#{button.pedido}"></a>
+						</div>
+
+						<table class="table table-striped table-hover align-middle">
+							<thead>
+								<tr>
+									<th th:text="#{pedido.id}"></th>
+									<th th:text="#{pedido.usuario.nome}"></th>
+									<th th:text="#{pedido.date}"></th>
+									<th>Ações</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:if="${pedidos.empty}">
+									<td colspan="4" th:text="#{pedido.no}"></td>
+								</tr>
+								<tr th:each="pedido : ${pedidos}">
+									<td><span th:text="${pedido.id}"></span></td>
+									<td><span th:text="${pedido.nome}"></span></td>
+									<td><span th:text="${pedido.data}"></span></td>
+									<td><a class="btn btn-outline-primary btn-sm"
+										th:href="@{/pedido/ver/{id}/{data}(id=${pedido.id}, data=${pedido.data})}"
+										th:text="#{pedido.ver}"></a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

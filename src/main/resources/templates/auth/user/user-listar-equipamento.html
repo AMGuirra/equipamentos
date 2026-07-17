@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<title>Lista de equipamentos</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script th:src="@{/js/theme.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" th:href="@{/bootstrap-5.1.3-dist/css/styles.css}">
+
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		var form = document.getElementById('postPedidos');
+		var submitButton = document.querySelector('.show-selected');
+		var confirmButton = document.getElementById('confirmarPedidoButton');
+		var modalElement = document.getElementById('confirmarPedidoModal');
+
+		if (!form || !submitButton || !confirmButton || !modalElement) {
+			return;
+		}
+
+		var modal = new bootstrap.Modal(modalElement);
+
+		submitButton.addEventListener('click', function (event) {
+			event.preventDefault();
+			modal.show();
+		});
+
+		confirmButton.addEventListener('click', function () {
+			form.submit();
+		});
+	});
+</script>
+
+
+</head>
+<body>
+	<div th:replace="auth/auth-generica-nav :: navGenerica"></div>
+
+	<div class="container">
+
+		<div class="row">
+			<div class="col-sm-5">
+				<form th:action="@{/equipamento/buscar}" method="post">
+					<div class="input-group">
+						<input type="text" class="form-control" name="nome" /> <input
+							class="btn btn-primary" type="submit" value="Buscar" /> <a
+							th:href="@{/equipamento/listar}" class="btn btn-danger"
+							type="submit" th:text="#{button.cancelar}"></a>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<h1 th:text="#{equipamento.list}"></h1>
+
+				<form id="postPedidos" method="post"
+					th:action="@{/equipamento/pedidos}">
+					<div th:if="${mensagemErro}"
+						class="alert alert-danger alert-dismissible fade show">
+						<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+						<span th:text="${mensagemErro}"></span>
+					</div>
+
+					<div class="card">
+						<div class="card-body">
+							<table class="table table-striped table-hover align-middle">
+								<thead>
+									<tr>
+										<th></th>
+										<th th:text="#{equipamento.id}"></th>
+										<th th:text="#{equipamento.nome}"></th>
+										<th th:text="#{equipamento.numeroDeSerie}"></th>
+										<th th:text="#{equipamento.fabricante}"></th>
+										<th th:text="#{equipamento.valor}"></th>
+										<th th:text="#{equipamento.descricao}"></th>
+										<th th:text="#{equipamento.categoria}"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:if="${equipamentos.empty}">
+										<td colspan="7" th:text="#{equipamento.no}"></td>
+									</tr>
+									<tr th:each="equipamento : ${equipamentos}">
+										<td><input type="checkbox" name="idsEquipamentos"
+											data-target="requests-all" th:value="${equipamento.id}" /></td>
+										<td><span th:text="${equipamento.id}"></span></td>
+										<td><span th:text="${equipamento.nome}"></span></td>
+										<td><span th:text="${equipamento.numeroDeSerie}"></span></td>
+										<td><span th:text="${equipamento.fabricante}"></span></td>
+										<td><span th:text="${equipamento.valor}"></span></td>
+										<td><span th:text="${equipamento.descricao}"></span></td>
+										<th:block th:if="${equipamento.categoria != null}">
+											<td><span th:text="${equipamento.categoria.nome}"></span></td>
+										</th:block>
+										<th:block th:unless="${equipamento.categoria != null}">
+											<td><span>Sem categoria</span></td>
+										</th:block>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+
+					<div class="card">
+						<div class="card-body">
+							<div class="row mb-3">
+								<div class="col">
+									<label th:text="#{equipamento.dataEmprestimo}"></label> <input
+										type="date" id="dataEmprestimo" class="form-control"
+										name="dataEmprestimo">
+								</div>
+								<div class="col">
+									<label th:text="#{equipamento.dataDevolucao}"></label> <input
+										type="date" id="dataDevolucao" class="form-control"
+										name="dataDevolucao">
+								</div>
+							</div>
+							<div class="mb-3">
+								<label for="finalidade" class="form-label"
+									th:text="#{equipamento.finalidade}"></label> <input type="text"
+									id="finalidade" class="form-control" name="finalidade">
+							</div>
+							<button type="button" class="btn btn-primary show-selected"
+								th:text="#{equipamento.pedido}"></button>
+						</div>
+					</div>
+
+
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="modal fade" id="confirmarPedidoModal" tabindex="-1" aria-labelledby="confirmarPedidoModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header bg-primary text-white">
+					<h5 class="modal-title" id="confirmarPedidoModalLabel">Confirmar pedido</h5>
+					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+				</div>
+				<div class="modal-body">
+					Confirma o envio do pedido selecionado?
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-primary" id="confirmarPedidoButton">Confirmar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

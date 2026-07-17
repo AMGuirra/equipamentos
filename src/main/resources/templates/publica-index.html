@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Controle de Equipamentos</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script th:src="@{/js/theme.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" th:href="@{/bootstrap-5.1.3-dist/css/styles.css}">
+
+</head>
+<body>
+	<div th:replace="auth/auth-generica-nav :: navGenerica"></div>
+	<header class="header text-center">
+		<div class="container">
+			<h1>Bem-vindo ao seu sistema de locação de equipamentos</h1>
+		</div>
+	</header>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-8">
+				<div class="welcome-message">
+					<h2 th:text="${msnBemVindo}"></h2>
+				</div>
+				<div class="content mt-4">
+					<h3>Sobre o Gestor de Ativos de Comunicação</h3>
+					<p>Este projeto de Trabalho de Conclusão de Curso (TCC) tem
+						como objetivo desenvolver um sistema de gestão de ativos de
+						comunicação. O sistema permite que usuários organizem, monitorem e
+						mantenham seus ativos de comunicação de forma eficiente e
+						centralizada. A plataforma oferece ferramentas para rastreamento
+						de ativos, relatórios detalhados e uma interface intuitiva,
+						facilitando a gestão e a tomada de decisões estratégicas.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

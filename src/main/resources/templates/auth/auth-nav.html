@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+
+	<ul th:fragment="nav" class="sidebar-nav">
+		<li class="sidebar-item dropdown">
+			<a href="#"
+				class="sidebar-link dropdown-toggle" data-bs-toggle="dropdown"
+				aria-expanded="false">
+				<span th:text ="${#authentication.getPrincipal().getNome()}"></span>
+			</a>
+			<div class="dropdown-menu">
+				<a class="dropdown-item"
+					th:href="@{/usuario/editar/{id}(id=${#authentication.getPrincipal().getId()})}"
+					th:text="#{user.alterar.usuario.edit.button}">
+				</a>
+				<a class="dropdown-item"
+					th:href="@{/usuario/editarSenha/{id}(id=${#authentication.getPrincipal().getId()})}"
+					th:text="#{auth.nav.password}"></a>
+				<div class="dropdown-divider"></div>
+				<button type="button" class="dropdown-item text-start"
+					onclick="alternarTema();" th:text="#{auth.nav.theme}"></button>
+				<div class="dropdown-divider"></div>
+				<a href="/logout" class="dropdown-item" th:text="#{auth.nav.logout}"></a>
+			</div>
+		</li>
+	</ul>
+
+</body>
+</html>

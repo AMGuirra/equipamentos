@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+  <nav th:fragment="nav" class="sidebar">
+        <a href="#" class="sidebar-brand" th:text="#{index.library}"></a>
+        <ul class="sidebar-nav">
+            <li class="sidebar-item" sec:authorize="@menuPermissaoService.podeExibir(authentication, 'INICIAL')">
+                <a href="/usuario/index" class="sidebar-link" th:text="#{index.home}"></a>
+            </li>
+            <li class="sidebar-heading" th:text="#{admin.nav.management}"></li>
+            <li class="sidebar-item" sec:authorize="@menuPermissaoService.podeExibir(authentication, 'USUARIOS')">
+                <a href="/usuario/admin/listar" class="sidebar-link" th:text="#{admin.nav.users}"></a>
+            </li>
+            <li class="sidebar-item" sec:authorize="@menuPermissaoService.podeExibir(authentication, 'CATEGORIAS')">
+                <a href="/auth/admin/categoria/listar" class="sidebar-link" th:text="#{admin.nav.categoria}"></a>
+            </li>
+            <li class="sidebar-item" sec:authorize="@menuPermissaoService.podeExibir(authentication, 'EQUIPAMENTOS_ADMIN')">
+                <a href="/equipamento/admin/listar" class="sidebar-link" th:text="#{admin.nav.equipamento}"></a>
+            </li>
+            <li class="sidebar-item" sec:authorize="@menuPermissaoService.podeExibir(authentication, 'PEDIDOS_ADMIN')">
+                <a href="/pedido/admin/listar" class="sidebar-link" th:text="#{admin.nav.pedido}"></a>
+            </li>
+            <li class="sidebar-item">
+                <a href="/admin/menus" class="sidebar-link" th:text="#{admin.nav.menus}"></a>
+            </li>
+        </ul>
+        <div class="sidebar-footer" th:insert="auth/auth-nav :: nav"></div>
+    </nav>
+	
+</body>
+</html>

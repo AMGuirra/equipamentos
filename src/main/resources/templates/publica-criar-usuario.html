@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insert title here</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script th:src="@{/js/theme.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" th:href="@{/bootstrap-5.1.3-dist/css/styles.css}">
+
+<style>
+.mensagem {
+	color: red;
+}
+</style>
+</head>
+<body>
+	<div th:replace="auth/auth-generica-nav :: navGenerica"></div>
+	<div class="container">
+		<div class="row justify-content-center mt-5">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header bg-primary text-white">
+						<h2 th:text="#{form.register}"></h2>
+					</div>
+					<div class="card-body">
+						<form action="#" th:action="@{/usuario/salvar}"
+							th:object="${usuario}" method="post">
+							<div class="mb-3 row">
+								<label class="col-sm-3 col-form-label text-end"
+									th:text="#{form.name}"></label>
+								<div class="col-sm-9">
+									<input class="form-control" type="text" th:field="*{nome}">
+									<span class="mensagem" th:if="${#fields.hasErrors('nome')}"
+										th:errors="*{nome}"></span>
+								</div>
+							</div>
+							<div class="mb-3 row">
+								<label class="col-sm-3 col-form-label text-end"
+									th:text="#{form.cpf}"></label>
+								<div class="col-sm-9">
+									<input class="form-control" type="text" th:field="*{cpf}">
+									<span class="mensagem" th:if="${#fields.hasErrors('cpf')}"
+										th:errors="*{cpf}"></span>
+								</div>
+							</div>
+							<div class="mb-3 row">
+								<label class="col-sm-3 col-form-label text-end"
+									th:text="#{form.birthday}"></label>
+								<div class="col-sm-9">
+									<input class="form-control" type="text"
+										th:field="*{dataNascimento}"> <span class="mensagem"
+										th:if="${#fields.hasErrors('dataNascimento')}"
+										th:errors="*{dataNascimento}"></span>
+								</div>
+							</div>
+							<div class="mb-3 row">
+								<label class="col-sm-3 col-form-label text-end"
+									th:text="#{form.email}"></label>
+								<div class="col-sm-9">
+									<input class="form-control" type="text" th:field="*{email}">
+									<span class="mensagem" th:if="${#fields.hasErrors('email')}"
+										th:errors="*{email}"></span>
+								</div>
+							</div>
+							<div class="mb-3 row">
+								<label class="col-sm-3 col-form-label text-end"
+									th:text="#{form.login}"></label>
+								<div class="col-sm-9">
+									<input class="form-control" type="text" th:field="*{login}">
+									<span class="mensagem" th:if="${#fields.hasErrors('login')}"
+										th:errors="*{login}"></span> <span class="mensagem"
+										th:if="${loginExiste}" th:text="${loginExiste}"></span>
+								</div>
+							</div>
+							<div class="mb-3 row">
+								<label class="col-sm-3 col-form-label text-end"
+									th:text="#{form.password}"></label>
+								<div class="col-sm-9">
+									<input class="form-control" type="text" th:field="*{password}">
+									<span class="mensagem" th:if="${#fields.hasErrors('password')}"
+										th:errors="*{password}"></span>
+								</div>
+							</div>
+							<div class="mb-3 row">
+								<div class="col-sm-9 offset-sm-3">
+									<input class="btn btn-primary" type="submit"
+										th:value="#{form.button}" />
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

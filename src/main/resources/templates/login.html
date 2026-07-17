@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title th:text="#{login.signin}">Login</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script th:src="@{/js/theme.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" th:href="@{/bootstrap-5.1.3-dist/css/styles.css}">
+
+</head>
+<body>
+	<div th:replace="auth/auth-generica-nav :: navGenerica"></div>
+	<div class="container">
+		<div class="row justify-content-center mt-5">
+			<div class="col-md-5">
+				<div class="card shadow-sm">
+					<div class="card-header bg-primary text-white text-center">
+						<h2 class="h4 mb-0" th:text="#{login.signin}">Login</h2>
+					</div>
+					<div class="card-body p-4">
+						<div th:if="${param.logout}" class="alert alert-success"
+							role="alert" th:text="#{login.logout}">
+							Você saiu com sucesso.
+						</div>
+						<form th:action="@{/login}" method="post">
+							<div class="mb-3">
+								<label class="form-label" th:text="#{login.username}"></label>
+								<input class="form-control" type="text" name="username"
+									autofocus="autofocus" required="required">
+							</div>
+							<div class="mb-3">
+								<label class="form-label" th:text="#{login.password}"></label>
+								<input class="form-control" type="password" name="password"
+									required="required">
+							</div>
+							<div class="mb-3">
+								<button class="btn btn-primary w-100" type="submit"
+									th:text="#{login.signin}"></button>
+							</div>
+							<div th:if="${param.error}" class="alert alert-danger mb-0"
+								role="alert">
+								<span th:text="#{login.invalid}"></span>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
